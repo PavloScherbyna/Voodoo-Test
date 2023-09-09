@@ -1,0 +1,29 @@
+.sign_up_btn,
+.option,
+.card_image p,
+.card_to_busket,
+.pagination button,
+.column_1 p,
+.column_2 p,
+.column_3 p {
+	transition: 0.3s;
+}
+.sign_up_btn:hover{
+	transform: scale(0.9);
+}
+.option:hover{
+	text-transform: uppercase;
+}
+.card_image p:hover{
+	color: black;
+	background-color: white;
+	transform: scale(1.1);
+	border: 1px solid black;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+.card_to_busket:hover{
+	transform: rotate(3deg);
+}
+.column_1 p:hover{
+	color: red;
+}

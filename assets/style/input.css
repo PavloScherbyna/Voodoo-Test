@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap');
+@import url('hover.css');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	
+}
+.container {
+	max-width: 1272px;
+	margin: 0 auto;
+}
+.f_container{
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+body{
+    background-color: #FCF7E6;
+	font-family: 'Space Grotesk', sans-serif;
+}
+header{
+	padding:48px 120px 48px 62px;
+}
+.header_wrapper{
+    display: flex;
+	justify-content: space-between;
+}
+.logo_content{
+	display: flex;
+}
+.logo_content img{
+	margin-bottom: auto;
+	margin-right: 12px;
+	cursor: pointer;
+}
+.user_content{
+	display: flex;
+}
+.user_content img{
+	margin-bottom: auto;
+	margin-right: 48px;
+	cursor: pointer;
+}
+
+.user_content a{
+	background-color: black;
+	color: white;
+	text-decoration: none;
+	padding: 15px;
+	border-radius: 4px;
+	font-weight: 700;
+	font-size: 20px;
+}
+
+hr{
+	background-color: black;
+	color: black;
+	height: 1px;
+}
+
+.alpha_select{
+	cursor: pointer;
+}
+
+.custom_select{
+	display: flex;
+	align-items: center;
+	background-color: black;
+	color: white;
+	width: 100%;
+	height: 48px;
+	border-radius: 4px;
+	padding:0 24px;
+	margin-top: 100px;
+}
+.custom_select img{
+	padding-right: 6px;
+}
+.custom_select h3{
+	padding-right: 48px;
+}
+.sircle_select{
+	margin-left: auto;
+}
+#options{
+	background-color: white;
+	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+	padding:24px;
+	display:none;
+}
+
+.product_wrapper{
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 48px;
+	gap: 24px;
+}
+
+.card_image{
+	border: 1px solid black ;
+	width: 300px;
+	height: 300px;
+}
+
+.card_image p{
+	display: flex;
+	text-transform: uppercase;
+	background-color: black;
+	color: white;
+	font-size: 12px;
+	margin: 12px;
+	width: 47px;
+	height: 24px;
+	border-radius: 4px;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+.shadow_information{
+	display: block;
+	z-index: 1;
+}
+.card_info{
+	display: flex;
+	justify-content: space-between;
+	margin: 12px 0;
+	max-width: 300px;
+}
+.product_name{
+	font-weight: 700;
+}
+.condition {
+	display: flex;
+	flex-direction: column;
+	font-size: 14px;
+	text-align: end;
+	font-weight: 400;
+}
+.bold{
+	font-weight: 500;
+	margin-right: 2px;
+}
+.card_to_busket{
+	width: 100%;
+	height: 42px;
+	background-color: black;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+.pagination{
+	margin: 83px 0 200px 0;
+	text-align: center;
+}
+
+.page_number {
+    padding: 15px 18px;
+    background-color: rgba(0, 0, 0, 0); 
+    color: black; 
+    border: 1px solid black; 
+    cursor: pointer; 
+    margin: 0 10px; 
+    border-radius: 50%; 
+}
+
+.page_number.active {
+    background-color: black !important;
+    color: white !important; 
+}
+
+.page_number.ellipsis {
+    pointer-events: none; 
+    background: none; 
+}
+
+
+footer{
+    width: 100%;
+    background-color: white;
+    color: black;
+    position: relative; 
+    margin-top: auto;
+	padding: 84px 0 84px 0;
+}
+
+.footer_wrapper{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+.footer_image img{
+	width: 82px;
+	height: 82px;
+}
+.footer_wrapper p {
+	color: #000;
+	font-family: 'Space Mono', monospace;
+	font-size: 14px;
+	font-weight: 700;
+	padding-top: 14px;
+	cursor: pointer;
+}
