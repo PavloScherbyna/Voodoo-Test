@@ -38,9 +38,9 @@
 		margin-bottom: 48px;
 	}
 	.footer_image img {
-        position: absolute; /* використовуємо позиціонування */
-        left: 50%; /* переміщуємо картинку на 50% від лівого краю батьківського блоку */
-        transform: translateX(-50%); /* центруємо її горизонтально */
+        position: absolute; 
+        left: 50%; 
+        transform: translateX(-50%); 
     }
 	.column_1{
 		padding-bottom: 48px;

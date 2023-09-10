@@ -56,16 +56,11 @@ async function fetchAndFillProductCards(page) {
             addToCartButton.className = 'card_to_busket';
             addToCartButton.textContent = 'ADD TO CART';
 
-            // Додамо обробник події для кнопки "ADD TO CART"
             addToCartButton.addEventListener('click', () => {
-                // Отримуємо інформацію про продукт, на який натиснули
                 const productName = product.title;
-
-                // Отримуємо ціну продукту та перетворюємо її на числовий формат (з заміною коми на крапку)
                 const productPriceText = product.variants[0]?.price || '0.00';
                 const productPrice = parseFloat(productPriceText.replace(',', '.'));
 
-                // Додавання товару до кошика
                 addToCart(productName, productPrice);
             });
 
@@ -83,21 +78,13 @@ async function fetchAndFillProductCards(page) {
     }
 }
 
-// Залиште решту коду незмінним
 
 fetchAndFillProductCards(currentPage);
-
-// Функція для форматування ціни
 function formatPrice(price) {
     const formattedPrice = parseFloat(price).toFixed(2);
     return formattedPrice.replace('.', ' ').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 }
 
-
-
-
-
-// Функція для створення нумерації сторінок
 function createPaginationButtons() {
     const paginationContainer = document.querySelector('.pagination');
     paginationContainer.innerHTML = ''; 
@@ -171,78 +158,59 @@ function updateActivePageStyle() {
     }
 }
 
-
-// Функція для переходу на вибрану сторінку
 function goToPage(pageNumber) {
     currentPage = pageNumber; 
     createPaginationButtons();
     fetchAndFillProductCards(currentPage);
 }
 
-// Початкова ініціалізація
 createPaginationButtons();
-fetchAndFillProductCards(currentPage); // Функція для запиту і відображення даних на початковій сторінці
+fetchAndFillProductCards(currentPage); 
 
-// Отримуємо всі кнопки сторінок
 const pageButtons = document.querySelectorAll('.page_number');
 
-// Функція для зміни стилю при кліку на кнопку
 function changeButtonStyle(event) {
-    // Змінюємо стиль всіх кнопок на стандартний (неактивний)
     pageButtons.forEach(button => {
         button.classList.remove('active');
         button.style.backgroundColor = 'rgba(0, 0, 0, 0)';
         button.style.color = 'black';
     });
 
-    // Змінюємо стиль клікнутої кнопки (робимо її активною)
     event.target.classList.add('active');
     event.target.style.backgroundColor = 'black';
     event.target.style.color = 'white';
 }
 
-// Додаємо обробник кліку до кожної кнопки
 pageButtons.forEach(button => {
     button.addEventListener('click', changeButtonStyle);
 });
 
-
-
-
-
-// Отримуємо посилання на елементи
 const cartToggle = document.getElementById('cartToggle');
 const closeCart = document.getElementById('closeCart');
 const basket = document.getElementById('basket');
 const main = document.querySelector('main');
 const footer = document.querySelector('footer');
 
-// Додаємо обробник подій для відкриття кошика
 cartToggle.addEventListener('click', () => {
-    basket.style.display = 'block'; // Показуємо кошик при кліку на корзину
-    main.style.display = 'none'; // Приховуємо <main>
-    footer.style.display = 'none'; // Приховуємо <footer>
+    basket.style.display = 'block'; 
+    main.style.display = 'none';
+    footer.style.display = 'none';
 });
 
-// Додаємо обробник подій для закриття кошика
 closeCart.addEventListener('click', () => {
-    basket.style.display = 'none'; // Приховуємо кошик при кліку на закриття
-    main.style.display = 'block'; // Відображаємо <main>
-    footer.style.display = 'block'; // Відображаємо <footer>
+    basket.style.display = 'none';
+    main.style.display = 'block';
+    footer.style.display = 'block';
 });
 
 const cart = {
-    items: [], // Масив продуктів у кошику
-    total: 0, // Загальна сума замовлення
+    items: [],
+    total: 0,
 };
 
 function updateCartDisplay() {
     const cartContainer = document.querySelector('.basket_content .select_order');
-
-    // Очистіть контейнер кошика
     cartContainer.innerHTML = '';
-
-    // Додайте продукти з кошика до відображення
     cart.items.forEach(item => {
         createProductCard(item, cartContainer);
     });
@@ -250,22 +218,16 @@ function updateCartDisplay() {
 
 function calculateTotal() {
     cart.total = cart.items.reduce((total, item) => total + item.price * item.quantity, 0);
-
-    // Оновіть відображення загальної суми з округленням до двох знаків після коми
     const totalElement = document.querySelector('.total_sum p:last-child');
     totalElement.textContent = `${cart.total.toFixed(2)} KR.`;
 }
 
-// Функція для додавання продукту до кошика
 function addToCart(productName, productPrice) {
-    // Перевірте, чи такий продукт вже є у кошику
     const existingProduct = cart.items.find(item => item.name === productName);
 
     if (existingProduct) {
-        // Якщо продукт вже є у кошику, збільште його кількість
         existingProduct.quantity += 1;
     } else {
-        // Якщо продукта немає у кошику, додайте його
         const newProduct = {
             name: productName,
             price: productPrice,
@@ -274,33 +236,26 @@ function addToCart(productName, productPrice) {
         cart.items.push(newProduct);
     }
 
-    // Оновіть відображення кошика і обчисліть загальну суму
     updateCartDisplay();
     calculateTotal();
 }
 
-// Функція для зменшення кількості продукту в кошику
 function decreaseQuantity(productName) {
     const existingProduct = cart.items.find(item => item.name === productName);
 
     if (existingProduct && existingProduct.quantity > 1) {
         existingProduct.quantity -= 1;
     } else if (existingProduct && existingProduct.quantity === 1) {
-        // Якщо кількість дорівнює 1, видаліть продукт з кошика
         const productIndex = cart.items.indexOf(existingProduct);
         if (productIndex !== -1) {
             cart.items.splice(productIndex, 1);
         }
     }
-
-    // Оновіть відображення кошика і обчисліть загальну суму
     updateCartDisplay();
     calculateTotal();
 }
 
-// Функція для створення карточки товару
 function createProductCard(product, cartContainer) {
-    // Створюємо елементи для карточки товару
     const productCard = document.createElement('div');
     productCard.className = 'product';
 
@@ -321,7 +276,6 @@ function createProductCard(product, cartContainer) {
     deleteIcon.className = 'delete';
     deleteIcon.innerHTML = `<img src="assets/image/delete-bin-6-line.svg" alt="delete object" data-product-name="${product.name}">`;
 
-    // Додаємо обробник подій для кнопок "+" та "-"
     const subtractButton = productInfo.querySelector('.subtract');
     const addButton = productInfo.querySelector('.add');
 
@@ -333,23 +287,19 @@ function createProductCard(product, cartContainer) {
         addToCart(product.name, product.price);
     });
 
-    // Додаємо обробник події для видалення продукту
     const deleteButton = deleteIcon.querySelector('img');
     deleteButton.addEventListener('click', (event) => {
         const productName = event.target.getAttribute('data-product-name');
         removeProduct(productName);
     });
 
-    // Додаємо елементи до карточки товару
     productCard.appendChild(imageContainer);
     productCard.appendChild(productInfo);
     productCard.appendChild(deleteIcon);
-
-    // Додаємо карточку товару до відображення кошика
     cartContainer.appendChild(productCard);
 }
 
-// Функція для видалення продукту з кошика
+
 function removeProduct(productName) {
     const existingProduct = cart.items.find(item => item.name === productName);
 
@@ -363,7 +313,6 @@ function removeProduct(productName) {
     }
 }
 
-// Викликаємо функцію updateCartDisplay при завантаженні сторінки для відображення початкового вмісту кошика
 document.addEventListener('DOMContentLoaded', () => {
     const cartContainer = document.querySelector('.basket_content .select_order');
     updateCartDisplay(cartContainer);
