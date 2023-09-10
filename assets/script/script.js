@@ -243,6 +243,32 @@ const cart = {
     total: 0, // Загальна сума замовлення
 };
 
+function updateCartDisplay() {
+    const cartContainer = document.querySelector('.basket_content .product');
+
+    // Очистіть контейнер кошика
+    cartContainer.innerHTML = '';
+
+    // Додайте продукти з кошика до відображення
+    cart.items.forEach(item => {
+        const productElement = document.createElement('div');
+        productElement.className = 'product_information';
+        productElement.innerHTML = `
+            <p>${item.name}</p>
+            <p>${item.quantity} x ${item.price} KR.</p>
+        `;
+
+        cartContainer.appendChild(productElement);
+    });
+}
+
+function calculateTotal() {
+    cart.total = cart.items.reduce((total, item) => total + item.price * item.quantity, 0);
+
+    // Оновіть відображення загальної суми
+    const totalElement = document.querySelector('.total_sum p:last-child');
+    totalElement.textContent = `${cart.total} KR.`;
+}
 // Функція для додавання продукту до кошика
 function addToCart(productName, productPrice) {
     // Перевірте, чи такий продукт вже є у кошику
@@ -265,49 +291,45 @@ function addToCart(productName, productPrice) {
     calculateTotal();
 }
 
-// Функція для оновлення відображення кошика
-function updateCartDisplay() {
-    const cartContainer = document.querySelector('.basket_content .product');
+// Функція для зменшення кількості продукту в кошику
+function decreaseQuantity(productName) {
+    const existingProduct = cart.items.find(item => item.name === productName);
 
-    // Очистіть контейнер кошика
-    cartContainer.innerHTML = '';
+    if (existingProduct && existingProduct.quantity > 1) {
+        existingProduct.quantity -= 1;
+    } else if (existingProduct && existingProduct.quantity === 1) {
+        // Якщо кількість дорівнює 1, видаліть продукт з кошика
+        const productIndex = cart.items.indexOf(existingProduct);
+        if (productIndex !== -1) {
+            cart.items.splice(productIndex, 1);
+        }
+    }
 
-    // Додайте продукти з кошика до відображення
-    cart.items.forEach(item => {
-        const productElement = document.createElement('div');
-        productElement.className = 'product_information';
-        productElement.innerHTML = `
-            <p>${item.name}</p>
-            <p>${item.quantity} x ${item.price} KR.</p>
-        `;
+    // Оновіть відображення кошика і обчисліть загальну суму
+    updateCartDisplay();
+    calculateTotal();
+}
 
-        cartContainer.appendChild(productElement);
+
+// Оновіть обробники подій для кнопок "+" та "-"
+const subtractButtons = document.querySelectorAll('.product_information #subtract');
+const addButtons = document.querySelectorAll('.product_information #add');
+
+subtractButtons.forEach(subtractButton => {
+    subtractButton.addEventListener('click', () => {
+        // Отримайте інформацію про продукт, на який натиснули "-"
+        const productName = subtractButton.closest('.product_information').querySelector('p:first-child').textContent;
+        decreaseQuantity(productName);
     });
-}
+});
 
-// Функція для обчислення загальної суми
-function calculateTotal() {
-    cart.total = cart.items.reduce((total, item) => total + item.price * item.quantity, 0);
+addButtons.forEach(addButton => {
+    addButton.addEventListener('click', () => {
+        // Отримайте інформацію про продукт, на який натиснули "+"
+        const productName = addButton.closest('.product_information').querySelector('p:first-child').textContent;
+        const productPriceText = addButton.closest('.product_information').querySelector('p:last-child').textContent;
+        const productPrice = parseFloat(productPriceText.replace(/[^0-9.-]+/g, '')); // Видаляємо всі нечислові символи
 
-    // Оновіть відображення загальної суми
-    const totalElement = document.querySelector('.total_sum p:last-child');
-    totalElement.textContent = `${cart.total} KR.`;
-}
-
-// Додаємо обробник подій для кнопки "ADD TO CART" для кожного продукту
-const addToCartButtons = document.querySelectorAll('.card_to_busket');
-
-addToCartButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        // Отримайте інформацію про продукт, на який натиснули
-        const productCard = button.closest('.product_card');
-        const productName = productCard.querySelector('.product_name p').textContent;
-
-        // Отримайте ціну продукту та перетворіть її на числовий формат
-        const productPriceText = productCard.querySelector('.condition p').textContent;
-        const productPrice = parseFloat(productPriceText);
-
-        // Додайте продукт до кошика
         addToCart(productName, productPrice);
     });
 });
