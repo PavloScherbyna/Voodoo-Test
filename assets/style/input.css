@@ -45,7 +45,7 @@ header{
 	cursor: pointer;
 }
 
-.user_content a{
+.sign_up_btn a{
 	background-color: black;
 	color: white;
 	text-decoration: none;
@@ -206,4 +206,51 @@ footer{
 	font-weight: 700;
 	padding-top: 14px;
 	cursor: pointer;
+}
+
+
+.basket_content{
+	background-color: #1E1E1E;
+	color: #FCF7E6;
+	position: absolute;
+	right: 0%;
+	top: 0%;
+	height: 100%;
+	width: 445px;
+	padding: 49px 45px 0 37px ;
+	display: none;
+}
+.main_basket_content{
+	display:flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 22px;
+}
+.main_basket_content img{
+	cursor: pointer;
+}
+.product{
+	width: 74px;
+	height: 74px;
+	border-radius: 4px;
+	border: 1px solid rgba(255, 255, 255, 0.50);
+	margin-right: 18px;
+}
+.flex_product{
+	display: flex;
+	justify-content: space-between;
+}
+.delete{
+	margin-left: auto;
+}
+.select_order{
+	display: flex;
+	justify-content: space-between;
+	margin: 53px 0 32px 0;
+}
+.total_sum{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 35px;
 }

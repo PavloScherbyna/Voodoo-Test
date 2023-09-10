@@ -16,10 +16,37 @@
             </div>
 
             <div class="user_content">
-                <img src="assets/image/shopping-cart (1) 1.png" alt="busket">
+                <img id="cartToggle"  src="assets/image/shopping-cart (1) 1.svg" alt="busket">
                 <div class="sign_up_btn">
                     <a href="#">Sign-up</a>
                 </div>
+            </div>
+        </div>
+        <div class="basket_content" id="basket">
+            <div class="main_basket_content">
+                <p>Shopping Cart</p>
+                <img src="assets/image/close-line.svg" alt="close busket" id="closeCart">
+            </div>
+            <hr>
+                <div class="select_order">
+                    <div class="product">
+                        
+                    </div>
+                        <div class="product_information">
+                            <p>Product Name</p> 
+                            <p>1 000 KR.</p>
+                            <div class="correct_numerosity">
+                                <span id="subtract">-</span>1<span id="add">+</span>
+                            </div>
+                        </div>
+                        <div class="delete">
+                            <img src="assets/image/delete-bin-6-line.svg" alt="delete object">
+                        </div>
+                    </div>
+            <hr>
+            <div class="total_sum">
+                <p>TOTAL</p>
+                <p>000 KR.</p>
             </div>
         </div>
     </header>
@@ -99,6 +126,7 @@
             </div>
         </div>
     </footer>
+
     <script src="assets/script/script.js"></script>
 </body>
 </html>
