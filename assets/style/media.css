@@ -1,0 +1,100 @@
+@media screen and (max-width: 1271px) {
+    .product_wrapper {
+        justify-content: center;
+    }
+	.alpha_select{
+		padding: 0 20px;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	footer{
+		padding: 84px 20px 84px 20px;
+	}
+}
+
+@media screen and (max-width: 690px) {
+	header {
+		    padding: 24px;
+	}
+	.user_content img {
+		margin-right: 16px;
+		cursor: pointer;
+	}
+}
+@media screen and (max-width: 565px) {
+	p {
+		font-size: 12px;
+	}
+	.footer_wrapper{
+		display: flex;
+		flex-direction: column-reverse;
+		justify-content: center;
+		align-items: flex-start;
+		padding-left: 48px;
+	}
+	.footer_image {
+		text-align: center;
+		margin-bottom: 48px;
+	}
+	.footer_image img {
+        position: absolute; /* використовуємо позиціонування */
+        left: 50%; /* переміщуємо картинку на 50% від лівого краю батьківського блоку */
+        transform: translateX(-50%); /* центруємо її горизонтально */
+    }
+	.column_1{
+		padding-bottom: 48px;
+	}
+	.sign_up_btn a {
+		padding: 11px;
+		border-radius: 4px;
+		font-weight: 600;
+		font-size: 13px;
+	}
+	
+}
+
+@media screen and (max-width: 529px) {
+	.for_media_1{
+		width: 23px;
+		height: 23px;
+	}
+	.for_media_2{
+		width: 107px;
+		height: 50px;
+	}
+	.custom_select h3 {
+    	padding-right: 25px;
+	}
+}
+
+@media screen and (max-width: 457px) {
+	.custom_select h3 {
+		padding-right: 10px;
+	}
+	.custom_select p{
+		padding-right: 10px;
+	}
+}
+
+@media screen and (max-width: 445px) {
+	.basket_content{
+		width: 100%;
+	}
+	.product_information {
+		max-width: 130px;
+	}
+}
+@media screen and (max-width: 414px) {
+	.pagination {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		margin: 83px 0 200px 0;
+		text-align: center;
+	}
+	.page_number{
+		margin: 2px;
+	}
+}

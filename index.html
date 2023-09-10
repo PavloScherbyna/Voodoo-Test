@@ -5,14 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style/input.css">
+    <link rel="stylesheet" href="assets/style/media.css">
     <title>VooDoo Test</title>
 </head>
 <body>
     <header>
         <div class="header_wrapper">
             <div class="logo_content">
-                <img src="assets/image/Logomark.png" alt="logo smal">
-                <img src="assets/image/VooDoo Test.png" alt="logo text">
+                <img class="for_media_1" src="assets/image/Logomark.png" alt="logo smal">
+                <img class="for_media_2" src="assets/image/VooDoo Test.png" alt="logo text">
             </div>
 
             <div class="user_content">
@@ -28,27 +29,17 @@
                 <img src="assets/image/close-line.svg" alt="close busket" id="closeCart">
             </div>
             <hr>
-                <div class="select_order">
-                    <div class="product">
-                        
-                    </div>
-                        <div class="product_information">
-                            <p>Product Name</p> 
-                            <p>1 000 KR.</p>
-                            <div class="correct_numerosity">
-                                <span id="subtract">-</span>1<span id="add">+</span>
-                            </div>
-                        </div>
-                        <div class="delete">
-                            <img src="assets/image/delete-bin-6-line.svg" alt="delete object">
-                        </div>
-                    </div>
+            <div class="select_order">
+                <!-- Початкова карточка відсутня в HTML -->
+            </div>
             <hr>
             <div class="total_sum">
                 <p>TOTAL</p>
                 <p>000 KR.</p>
             </div>
         </div>
+        
+        
     </header>
     <main>
        <hr>
@@ -62,10 +53,6 @@
                 <img class="sircle_select" src="assets/image/chevron-down.png" alt="sircle in select">
             </div>
             <div id="options">
-                <div class="option">Option 1</div>
-                <div class="option">Option 2</div>
-                <div class="option">Option 3</div>
-                <div class="option">Option 4</div>
             </div>
         </div>
 
@@ -74,9 +61,6 @@
             <div class="product_card">
                 <div class="card_image">
                     <p>Used</p>
-                    <div class="shadow_information">
-                        <p>any information can be found here</p> 
-                     </div>
                 </div>
                 <div class="card_info">
                     <div class="product_name">
@@ -85,8 +69,7 @@
                     </div>
                     <div class="condition">
                         <p class="bold">Condition</p>
-                        <br>
-                        <p>Slightly used</p>
+                        <p class="txt">Slightly used</p>
                     </div>                
                 </div>
                     <button class="card_to_busket">ADD TO CART</button>

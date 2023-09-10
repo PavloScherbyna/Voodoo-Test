@@ -20,6 +20,8 @@
 body{
     background-color: #FCF7E6;
 	font-family: 'Space Grotesk', sans-serif;
+	position: relative;
+    min-height: 100vh; 
 }
 header{
 	padding:48px 120px 48px 62px;
@@ -38,9 +40,11 @@ header{
 }
 .user_content{
 	display: flex;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
 }
 .user_content img{
-	margin-bottom: auto;
 	margin-right: 48px;
 	cursor: pointer;
 }
@@ -82,6 +86,9 @@ hr{
 .custom_select h3{
 	padding-right: 48px;
 }
+.custom_select p{
+	text-align: center;
+}
 .sircle_select{
 	margin-left: auto;
 }
@@ -96,8 +103,10 @@ hr{
 .product_wrapper{
 	display: flex;
 	flex-wrap: wrap;
+	align-items: flex-end;
 	margin-top: 48px;
 	gap: 24px;
+	height: 100%;
 }
 
 .card_image{
@@ -121,15 +130,12 @@ hr{
 	justify-content: center;
 	cursor: pointer;
 }
-.shadow_information{
-	display: block;
-	z-index: 1;
-}
 .card_info{
 	display: flex;
 	justify-content: space-between;
 	margin: 12px 0;
 	max-width: 300px;
+
 }
 .product_name{
 	font-weight: 700;
@@ -137,9 +143,9 @@ hr{
 .condition {
 	display: flex;
 	flex-direction: column;
-	font-size: 14px;
-	text-align: end;
+	font-size: 16px;
 	font-weight: 400;
+	text-align: end;
 }
 .bold{
 	font-weight: 500;
@@ -169,7 +175,7 @@ hr{
     border-radius: 50%; 
 }
 
-.page_number.active {
+.page_number:active {
     background-color: black !important;
     color: white !important; 
 }
@@ -181,12 +187,14 @@ hr{
 
 
 footer{
-    width: 100%;
+	width: 100%;
     background-color: white;
     color: black;
-    position: relative; 
+	position: relative;
     margin-top: auto;
-	padding: 84px 0 84px 0;
+    bottom: 0;
+    left: 0;
+    padding: 84px 0;
 }
 
 .footer_wrapper{
@@ -230,6 +238,10 @@ footer{
 	cursor: pointer;
 }
 .product{
+	display: flex;
+	justify-content: space-between;
+}
+.image_contant{
 	width: 74px;
 	height: 74px;
 	border-radius: 4px;
@@ -242,11 +254,14 @@ footer{
 }
 .delete{
 	margin-left: auto;
+	cursor: pointer;
 }
 .select_order{
-	display: flex;
-	justify-content: space-between;
 	margin: 53px 0 32px 0;
+}
+.select_order span {
+	cursor: pointer;
+	padding: 12px 10px;
 }
 .total_sum{
 	display: flex;
@@ -254,3 +269,5 @@ footer{
 	align-items: center;
 	margin-top: 35px;
 }
+
+

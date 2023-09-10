@@ -210,12 +210,6 @@ pageButtons.forEach(button => {
 
 
 
-
-
-
-
-
-
 // Отримуємо посилання на елементи
 const cartToggle = document.getElementById('cartToggle');
 const closeCart = document.getElementById('closeCart');
@@ -237,38 +231,31 @@ closeCart.addEventListener('click', () => {
     footer.style.display = 'block'; // Відображаємо <footer>
 });
 
-
 const cart = {
     items: [], // Масив продуктів у кошику
     total: 0, // Загальна сума замовлення
 };
 
 function updateCartDisplay() {
-    const cartContainer = document.querySelector('.basket_content .product');
+    const cartContainer = document.querySelector('.basket_content .select_order');
 
     // Очистіть контейнер кошика
     cartContainer.innerHTML = '';
 
     // Додайте продукти з кошика до відображення
     cart.items.forEach(item => {
-        const productElement = document.createElement('div');
-        productElement.className = 'product_information';
-        productElement.innerHTML = `
-            <p>${item.name}</p>
-            <p>${item.quantity} x ${item.price} KR.</p>
-        `;
-
-        cartContainer.appendChild(productElement);
+        createProductCard(item, cartContainer);
     });
 }
 
 function calculateTotal() {
     cart.total = cart.items.reduce((total, item) => total + item.price * item.quantity, 0);
 
-    // Оновіть відображення загальної суми
+    // Оновіть відображення загальної суми з округленням до двох знаків після коми
     const totalElement = document.querySelector('.total_sum p:last-child');
-    totalElement.textContent = `${cart.total} KR.`;
+    totalElement.textContent = `${cart.total.toFixed(2)} KR.`;
 }
+
 // Функція для додавання продукту до кошика
 function addToCart(productName, productPrice) {
     // Перевірте, чи такий продукт вже є у кошику
@@ -279,11 +266,12 @@ function addToCart(productName, productPrice) {
         existingProduct.quantity += 1;
     } else {
         // Якщо продукта немає у кошику, додайте його
-        cart.items.push({
+        const newProduct = {
             name: productName,
             price: productPrice,
             quantity: 1,
-        });
+        };
+        cart.items.push(newProduct);
     }
 
     // Оновіть відображення кошика і обчисліть загальну суму
@@ -310,26 +298,73 @@ function decreaseQuantity(productName) {
     calculateTotal();
 }
 
+// Функція для створення карточки товару
+function createProductCard(product, cartContainer) {
+    // Створюємо елементи для карточки товару
+    const productCard = document.createElement('div');
+    productCard.className = 'product';
 
-// Оновіть обробники подій для кнопок "+" та "-"
-const subtractButtons = document.querySelectorAll('.product_information #subtract');
-const addButtons = document.querySelectorAll('.product_information #add');
+    const imageContainer = document.createElement('div');
+    imageContainer.className = 'image_contant';
 
-subtractButtons.forEach(subtractButton => {
+    const productInfo = document.createElement('div');
+    productInfo.className = 'product_information';
+    productInfo.innerHTML = `
+        <p>${product.name}</p>
+        <p>${product.quantity} x ${product.price.toFixed(2)} KR.</p>
+        <div class="correct_numerosity">
+            <span class="subtract">-</span>${product.quantity}<span class="add">+</span>
+        </div>
+    `;
+
+    const deleteIcon = document.createElement('div');
+    deleteIcon.className = 'delete';
+    deleteIcon.innerHTML = `<img src="assets/image/delete-bin-6-line.svg" alt="delete object" data-product-name="${product.name}">`;
+
+    // Додаємо обробник подій для кнопок "+" та "-"
+    const subtractButton = productInfo.querySelector('.subtract');
+    const addButton = productInfo.querySelector('.add');
+
     subtractButton.addEventListener('click', () => {
-        // Отримайте інформацію про продукт, на який натиснули "-"
-        const productName = subtractButton.closest('.product_information').querySelector('p:first-child').textContent;
-        decreaseQuantity(productName);
+        decreaseQuantity(product.name);
     });
-});
 
-addButtons.forEach(addButton => {
     addButton.addEventListener('click', () => {
-        // Отримайте інформацію про продукт, на який натиснули "+"
-        const productName = addButton.closest('.product_information').querySelector('p:first-child').textContent;
-        const productPriceText = addButton.closest('.product_information').querySelector('p:last-child').textContent;
-        const productPrice = parseFloat(productPriceText.replace(/[^0-9.-]+/g, '')); // Видаляємо всі нечислові символи
-
-        addToCart(productName, productPrice);
+        addToCart(product.name, product.price);
     });
+
+    // Додаємо обробник події для видалення продукту
+    const deleteButton = deleteIcon.querySelector('img');
+    deleteButton.addEventListener('click', (event) => {
+        const productName = event.target.getAttribute('data-product-name');
+        removeProduct(productName);
+    });
+
+    // Додаємо елементи до карточки товару
+    productCard.appendChild(imageContainer);
+    productCard.appendChild(productInfo);
+    productCard.appendChild(deleteIcon);
+
+    // Додаємо карточку товару до відображення кошика
+    cartContainer.appendChild(productCard);
+}
+
+// Функція для видалення продукту з кошика
+function removeProduct(productName) {
+    const existingProduct = cart.items.find(item => item.name === productName);
+
+    if (existingProduct) {
+        const productIndex = cart.items.indexOf(existingProduct);
+        if (productIndex !== -1) {
+            cart.items.splice(productIndex, 1);
+            updateCartDisplay();
+            calculateTotal();
+        }
+    }
+}
+
+// Викликаємо функцію updateCartDisplay при завантаженні сторінки для відображення початкового вмісту кошика
+document.addEventListener('DOMContentLoaded', () => {
+    const cartContainer = document.querySelector('.basket_content .select_order');
+    updateCartDisplay(cartContainer);
 });
